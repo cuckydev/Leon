@@ -55,7 +55,7 @@ target_include_directories(Leon.CLI PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/SystemI
 # Link libclang
 set(LLVM_ROOT "")
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/libclang")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/libclang/lib") # NOTE: /lib because there's now a README in libclang
 	set(LLVM_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/libclang")
 elseif (EXISTS "C:/Program Files/LLVM") # Default Windows LLVM directory
 	set(LLVM_ROOT "C:/Program Files/LLVM")
