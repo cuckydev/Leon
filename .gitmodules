@@ -1,0 +1,3 @@
+[submodule "ThirdParty/luau"]
+	path = ThirdParty/luau
+	url = https://github.com/luau-lang/luau/
