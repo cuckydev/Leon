@@ -1,0 +1,14 @@
+# IDE files
+/.vs
+/.vscode
+/CMakeSettings.json
+
+# CMake builds
+/out
+/build
+
+# Binaries
+/ThirdParty/libclang
+/ThirdParty/libcxx
+/ThirdParty/libc
+/ThirdParty/clang
