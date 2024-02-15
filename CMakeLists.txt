@@ -53,18 +53,16 @@ file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/SystemIncludeFrame/LeonSystemIncludeFram
 target_include_directories(Leon.CLI PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/SystemIncludeFrame")
 
 # Link libclang
+set(LLVM_ROOT "")
+
 if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/libclang")
-	message(STATUS "Using libclang from ThirdParty/")
-	
-	target_link_directories(Leon.CLI PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/libclang/bin")
-	target_link_directories(Leon.CLI PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/libclang/lib")
-	target_link_libraries(Leon.CLI PRIVATE libclang)
-
-	target_include_directories(Leon.CLI PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/libclang/include")
+	set(LLVM_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/libclang")
 elseif (EXISTS "C:/Program Files/LLVM") # Default Windows LLVM directory
-	message(STATUS "Using libclang from Windows LLVM install")
-
 	set(LLVM_ROOT "C:/Program Files/LLVM")
+endif()
+
+if (LLVM_ROOT)
+	message(STATUS "Using libclang install at ${LLVM_ROOT}")
 	
 	target_link_directories(Leon.CLI PRIVATE "${LLVM_ROOT}/bin")
 	target_link_directories(Leon.CLI PRIVATE "${LLVM_ROOT}/lib")
