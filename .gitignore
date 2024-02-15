@@ -8,7 +8,5 @@
 /build
 
 # Binaries
-/ThirdParty/libclang
-/ThirdParty/libcxx
-/ThirdParty/libc
-/ThirdParty/clang
+/ThirdParty/libclang/*
+!/ThirdParty/libclang/README.md
