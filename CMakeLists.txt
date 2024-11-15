@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 # Leon project
-set(LEON_VERSION 0.2.0)
+set(LEON_VERSION 1.0.0)
 
 project(Leon
 	LANGUAGES C CXX
