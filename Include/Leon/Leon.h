@@ -26,10 +26,12 @@
 
 #define LEON __attribute__((annotate("@leon")))
 #define LEON_KV(key, value) __attribute__((annotate("@leonkv " #key " " #value)))
+#define LEON_V(value) __attribute__((annotate("@leonkv " #value " \"true\"")))
 
 #else
 
 #define LEON
 #define LEON_KV(...)
+#define LEON_V(...)
 
 #endif

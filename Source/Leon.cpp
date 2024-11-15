@@ -47,7 +47,7 @@ static StdPath GetStdPath(const std::string &src)
 
 	// TODO: I think this throws exceptions with non-ANSI characters with MSVC
 	// I don't have a particularly convenient way to test that right now though.
-	out.utf8 = out.path.u8string();
+	out.utf8 = out.path.string();
 	for (auto &i : out.utf8)
 		if (i == '\\')
 			i = '/';
@@ -318,7 +318,7 @@ int main(int argc, char **argv)
 		for (auto &source : source_args)
 		{
 			// Get shorthand name
-			std::string short_name = source.std.path.filename().u8string();
+			std::string short_name = source.std.path.filename().string();
 
 			if (!source.rebuild)
 			{
@@ -378,6 +378,7 @@ int main(int argc, char **argv)
 					{
 						case CXError_Failure:
 							problem = "Failure";
+							break;
 						case CXError_Crashed:
 							problem = "Crashed";
 							break;
@@ -389,6 +390,7 @@ int main(int argc, char **argv)
 							break;
 						default:
 							problem = std::to_string(ec);
+							break;
 					}
 					throw std::runtime_error(problem + " wasn't caught by a diagnostic.");
 				}
@@ -519,7 +521,7 @@ int main(int argc, char **argv)
 		std::cerr << "========================================" << '\n';
 		std::cerr << "Leon generator failed!" << '\n';
 		std::cerr << "========================================" << '\n';
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 		return 1;
 	}
 

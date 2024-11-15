@@ -1,9 +1,11 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.14)
 
 # Leon project
+set(LEON_VERSION 0.2.0)
+
 project(Leon
 	LANGUAGES C CXX
-	VERSION 0.2.0
+	VERSION ${LEON_VERSION}
 	HOMEPAGE_URL "https://ckdev.org/"
 )
 
@@ -15,7 +17,7 @@ add_library(Leon INTERFACE)
 
 target_include_directories(Leon INTERFACE "Include")
 
-target_compile_definitions(Leon INTERFACE LEON_VERSION="${CMAKE_PROJECT_VERSION}")
+target_compile_definitions(Leon INTERFACE LEON_VERSION="${LEON_VERSION}")
 
 # Compile Leon CLI app
 add_executable(Leon.CLI
@@ -85,8 +87,12 @@ else()
 endif()
 
 # Compile and link luau
-set(LUAU_BUILD_TESTS OFF)
-add_subdirectory("ThirdParty/luau" EXCLUDE_FROM_ALL)
+if (NOT TARGET Luau.Compiler)
+	set(LUAU_BUILD_CLI OFF)
+	set(LUAU_BUILD_TESTS OFF)
+	set(LUAU_BUILD_WEB OFF)
+	add_subdirectory("ThirdParty/luau" EXCLUDE_FROM_ALL)
+endif()
 
 target_link_libraries(Leon.CLI PRIVATE Luau.Compiler Luau.VM)
 
